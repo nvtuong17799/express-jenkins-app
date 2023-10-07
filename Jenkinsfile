@@ -1,17 +1,14 @@
 pipeline {
     agent any
 
-    triggers {
-        pollSCM('H/5 * * * *') // Poll SCM every 5 minutes
+    agent {
+        docker {
+            image 'node:18.18.0-alpine3.18' 
+            args '-p 3000:3000' 
+        }
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
