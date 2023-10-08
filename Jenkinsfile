@@ -6,19 +6,19 @@ pipeline {
     stages {
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                sh 'npm install && npm version'
             }
         }
 
-        stage('Build') {
+        stage('Test version') {
             steps {
-                sh 'npm run build'
+                sh 'npm version'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'npm test'
+                sh 'npm run test'
             }
         }
 
